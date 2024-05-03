@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Opcao;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOpcaoRequest;
+use App\Http\Requests\UpdateOpcaoRequest;
 
 class OpcaoController extends Controller
 {
@@ -17,14 +20,12 @@ class OpcaoController extends Controller
         return response()->json($opcoes);
     }
 
-    // Método para exibir uma opção específica
-    public function show($opc_id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        // Busca uma opção pelo seu ID
-        $opcao = Opcao::findOrFail($opc_id);
-
-        // Retorna uma resposta JSON com a opção encontrada
-        return response()->json($opcao);
+        //
     }
 
     // Método para armazenar uma nova opção
@@ -37,6 +38,24 @@ class OpcaoController extends Controller
 
         // Retorna uma resposta JSON com a opção recém-criada e o código de status 201 (Created)
         return response()->json($opcao, 201);
+    }
+
+    // Método para exibir uma opção específica
+    public function show($opc_id)
+    {
+        // Busca uma opção pelo seu ID
+        $opcao = Opcao::findOrFail($opc_id);
+
+        // Retorna uma resposta JSON com a opção encontrada
+        return response()->json($opcao);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Opcao $opcao)
+    {
+        //
     }
 
     // Método para atualizar uma opção existente

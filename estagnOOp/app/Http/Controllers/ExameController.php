@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Exame; // Importa o modelo Exame
+use App\Models\Exame;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreExameRequest;
+use App\Http\Requests\UpdateExameRequest;
 
 class ExameController extends Controller
 {
@@ -17,14 +20,12 @@ class ExameController extends Controller
         return response()->json($exames);
     }
 
-    // Método para exibir um exame específico
-    public function show($exa_que_id, $exa_pro_id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        // Busca um exame pelo seu ID
-        $exame = Exame::where('exa_que_id', $exa_que_id)->where('exa_pro_id', $exa_pro_id)->firstOrFail();
-
-        // Retorna uma resposta JSON com o exame encontrado
-        return response()->json($exame);
+        //
     }
 
     // Método para armazenar um novo exame
@@ -37,6 +38,24 @@ class ExameController extends Controller
 
         // Retorna uma resposta JSON com o exame recém-criado e o código de status 201 (Created)
         return response()->json($exame, 201);
+    }
+
+    // Método para exibir um exame específico
+    public function show($exa_que_id, $exa_pro_id)
+    {
+        // Busca um exame pelo seu ID
+        $exame = Exame::where('exa_que_id', $exa_que_id)->where('exa_pro_id', $exa_pro_id)->firstOrFail();
+
+        // Retorna uma resposta JSON com o exame encontrado
+        return response()->json($exame);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Exame $exame)
+    {
+        //
     }
 
     // Método para atualizar um exame existente

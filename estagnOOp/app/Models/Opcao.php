@@ -21,7 +21,7 @@ class Opcao extends Model
     ];
 
     // Define relacionamentos com outros modelos
-    public function questao() {
+    public function questoes() {
         return $this->belongsTo(Questao::class, 'opc_que_id', 'que_id');
     }
 }

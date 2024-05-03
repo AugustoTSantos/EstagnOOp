@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Questao;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreQuestaoRequest;
+use App\Http\Requests\UpdateQuestaoRequest;
 
 class QuestaoController extends Controller
 {
@@ -17,14 +20,12 @@ class QuestaoController extends Controller
         return response()->json($questoes);
     }
 
-    // Método para exibir uma questão específica
-    public function show($que_id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        // Busca uma questão pelo seu ID
-        $questao = Questao::findOrFail($que_id);
-
-        // Retorna uma resposta JSON com a questão encontrada
-        return response()->json($questao);
+        //
     }
 
     // Método para armazenar uma nova questão
@@ -37,6 +38,24 @@ class QuestaoController extends Controller
 
         // Retorna uma resposta JSON com a questão recém-criada e o código de status 201 (Created)
         return response()->json($questao, 201);
+    }
+
+    // Método para exibir uma questão específica
+    public function show($que_id)
+    {
+        // Busca uma questão pelo seu ID
+        $questao = Questao::findOrFail($que_id);
+
+        // Retorna uma resposta JSON com a questão encontrada
+        return response()->json($questao);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Questao $questao)
+    {
+        //
     }
 
     // Método para atualizar uma questão existente

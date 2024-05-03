@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Prova; // Importa o modelo Prova
+use App\Models\Prova;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProvaRequest;
+use App\Http\Requests\UpdateProvaRequest;
 
 class ProvaController extends Controller
 {
@@ -17,14 +20,12 @@ class ProvaController extends Controller
         return response()->json($provas);
     }
 
-    // Método para exibir uma prova específica
-    public function show($pro_id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        // Busca uma prova pelo seu ID
-        $prova = Prova::findOrFail($pro_id);
-
-        // Retorna uma resposta JSON com a prova encontrada
-        return response()->json($prova);
+        //
     }
 
     // Método para armazenar uma nova prova
@@ -37,6 +38,24 @@ class ProvaController extends Controller
 
         // Retorna uma resposta JSON com a prova recém-criada e o código de status 201 (Created)
         return response()->json($prova, 201);
+    }
+
+    // Método para exibir uma prova específica
+    public function show($pro_id)
+    {
+        // Busca uma prova pelo seu ID
+        $prova = Prova::findOrFail($pro_id);
+
+        // Retorna uma resposta JSON com a prova encontrada
+        return response()->json($prova);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Prova $prova)
+    {
+        //
     }
 
     // Método para atualizar uma prova existente

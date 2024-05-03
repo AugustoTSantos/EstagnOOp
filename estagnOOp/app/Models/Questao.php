@@ -22,7 +22,7 @@ class Questao extends Model
     ];
 
     // Define relacionamentos com outros modelos
-    public function usuario() {
-        return $this->belongsTo(Usuario::class, 'que_usu_id', 'usu_id');
+    public function usuarios() {
+        return $this->belongsTo(User::class, 'que_usu_id', 'id');
     }
 }

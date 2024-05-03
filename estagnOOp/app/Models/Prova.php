@@ -21,7 +21,7 @@ class Prova extends Model
     ];
 
     // Define relacionamentos com outros modelos
-    public function usuario() {
-        return $this->belongsTo(Usuario::class, 'pro_usu_id', 'usu_id');
+    public function usuarios() {
+        return $this->belongsTo(User::class, 'pro_usu_id', 'id');
     }
 }

@@ -16,8 +16,15 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'name' => ['required', 'string', 'max:255'], // O campo 'name' é obrigatório, deve ser uma string e ter no máximo 255 caracteres
+            'email' => [
+                'required', // O campo 'email' é obrigatório
+                'string', // Deve ser uma string
+                'lowercase', // Converte o e-mail para minúsculas
+                'email', // Deve ser um endereço de e-mail válido
+                'max:255', // Deve ter no máximo 255 caracteres
+                Rule::unique(User::class)->ignore($this->user()->id), // Deve ser único na tabela de usuários, ignorando o e-mail atual do usuário
+            ],
         ];
     }
 }

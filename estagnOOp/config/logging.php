@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'default' => env('LOG_CHANNEL', 'stack'),
+    'default' => env('LOG_CHANNEL', 'stack'), // Define o canal de log padrão
 
     /*
     |--------------------------------------------------------------------------
@@ -32,8 +32,8 @@ return [
     */
 
     'deprecations' => [
-        'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
-        'trace' => env('LOG_DEPRECATIONS_TRACE', false),
+        'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'), // Define o canal de log de depreciações
+        'trace' => env('LOG_DEPRECATIONS_TRACE', false), // Define se deve rastrear as depreciações
     ],
 
     /*
@@ -53,78 +53,78 @@ return [
     'channels' => [
 
         'stack' => [
-            'driver' => 'stack',
-            'channels' => explode(',', env('LOG_STACK', 'single')),
-            'ignore_exceptions' => false,
+            'driver' => 'stack', // Define o driver como "stack" para empilhar canais de log
+            'channels' => explode(',', env('LOG_STACK', 'single')), // Define os canais a serem empilhados
+            'ignore_exceptions' => false, // Define se deve ignorar exceções (opcional)
         ],
 
         'single' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'replace_placeholders' => true,
+            'driver' => 'single', // Define o driver como "single" para log em um único arquivo
+            'path' => storage_path('logs/laravel.log'), // Define o caminho do arquivo de log
+            'level' => env('LOG_LEVEL', 'debug'), // Define o nível de log padrão
+            'replace_placeholders' => true, // Define se deve substituir os marcadores de posição (opcional)
         ],
 
         'daily' => [
-            'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-            'days' => env('LOG_DAILY_DAYS', 14),
-            'replace_placeholders' => true,
+            'driver' => 'daily', // Define o driver como "daily" para log diário em arquivos
+            'path' => storage_path('logs/laravel.log'), // Define o caminho do arquivo de log
+            'level' => env('LOG_LEVEL', 'debug'), // Define o nível de log padrão
+            'days' => env('LOG_DAILY_DAYS', 14), // Define a quantidade de dias para retenção de logs
+            'replace_placeholders' => true, // Define se deve substituir os marcadores de posição (opcional)
         ],
 
         'slack' => [
-            'driver' => 'slack',
-            'url' => env('LOG_SLACK_WEBHOOK_URL'),
-            'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'),
-            'emoji' => env('LOG_SLACK_EMOJI', ':boom:'),
-            'level' => env('LOG_LEVEL', 'critical'),
-            'replace_placeholders' => true,
+            'driver' => 'slack', // Define o driver como "slack" para enviar logs para o Slack
+            'url' => env('LOG_SLACK_WEBHOOK_URL'), // Define a URL do webhook do Slack
+            'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'), // Define o nome do usuário para os logs
+            'emoji' => env('LOG_SLACK_EMOJI', ':boom:'), // Define o emoji para os logs
+            'level' => env('LOG_LEVEL', 'critical'), // Define o nível de log padrão
+            'replace_placeholders' => true, // Define se deve substituir os marcadores de posição (opcional)
         ],
 
         'papertrail' => [
-            'driver' => 'monolog',
-            'level' => env('LOG_LEVEL', 'debug'),
-            'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
-            'handler_with' => [
-                'host' => env('PAPERTRAIL_URL'),
-                'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+            'driver' => 'monolog', // Define o driver como "monolog" para integração com Papertrail
+            'level' => env('LOG_LEVEL', 'debug'), // Define o nível de log padrão
+            'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class), // Define o manipulador de log
+            'handler_with' => [ // Define os parâmetros adicionais do manipulador
+                'host' => env('PAPERTRAIL_URL'), // Define o host do Papertrail
+                'port' => env('PAPERTRAIL_PORT'), // Define a porta do Papertrail
+                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'), // Define a string de conexão (opcional)
             ],
-            'processors' => [PsrLogMessageProcessor::class],
+            'processors' => [PsrLogMessageProcessor::class], // Define os processadores de log (opcional)
         ],
 
         'stderr' => [
-            'driver' => 'monolog',
-            'level' => env('LOG_LEVEL', 'debug'),
-            'handler' => StreamHandler::class,
-            'formatter' => env('LOG_STDERR_FORMATTER'),
-            'with' => [
-                'stream' => 'php://stderr',
+            'driver' => 'monolog', // Define o driver como "monolog" para log no stderr
+            'level' => env('LOG_LEVEL', 'debug'), // Define o nível de log padrão
+            'handler' => StreamHandler::class, // Define o manipulador de log
+            'formatter' => env('LOG_STDERR_FORMATTER'), // Define o formatador de log (opcional)
+            'with' => [ // Define os parâmetros adicionais do manipulador
+                'stream' => 'php://stderr', // Define o fluxo para o stderr
             ],
-            'processors' => [PsrLogMessageProcessor::class],
+            'processors' => [PsrLogMessageProcessor::class], // Define os processadores de log (opcional)
         ],
 
         'syslog' => [
-            'driver' => 'syslog',
-            'level' => env('LOG_LEVEL', 'debug'),
-            'facility' => env('LOG_SYSLOG_FACILITY', LOG_USER),
-            'replace_placeholders' => true,
+            'driver' => 'syslog', // Define o driver como "syslog" para log no sistema syslog
+            'level' => env('LOG_LEVEL', 'debug'), // Define o nível de log padrão
+            'facility' => env('LOG_SYSLOG_FACILITY', LOG_USER), // Define a instalação do sistema syslog
+            'replace_placeholders' => true, // Define se deve substituir os marcadores de posição (opcional)
         ],
 
         'errorlog' => [
-            'driver' => 'errorlog',
-            'level' => env('LOG_LEVEL', 'debug'),
-            'replace_placeholders' => true,
+            'driver' => 'errorlog', // Define o driver como "errorlog" para log no log de erros do PHP
+            'level' => env('LOG_LEVEL', 'debug'), // Define o nível de log padrão
+            'replace_placeholders' => true, // Define se deve substituir os marcadores de posição (opcional)
         ],
 
         'null' => [
-            'driver' => 'monolog',
-            'handler' => NullHandler::class,
+            'driver' => 'monolog', // Define o driver como "monolog" para um manipulador de log nulo
+            'handler' => NullHandler::class, // Define o manipulador de log nulo
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/laravel.log'), // Define o caminho do arquivo de log de emergência
         ],
 
     ],

@@ -17,6 +17,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function show(): Response
     {
+        // Renderiza a view para confirmar a senha usando o pacote Inertia
         return Inertia::render('Auth/ConfirmPassword');
     }
 
@@ -25,17 +26,21 @@ class ConfirmablePasswordController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Valida as credenciais do usuário (email e senha)
         if (! Auth::guard('web')->validate([
             'email' => $request->user()->email,
             'password' => $request->password,
         ])) {
+            // Se as credenciais não forem válidas, lança uma exceção de validação com uma mensagem de erro
             throw ValidationException::withMessages([
                 'password' => __('auth.password'),
             ]);
         }
 
+        // Armazena o momento da confirmação da senha na sessão
         $request->session()->put('auth.password_confirmed_at', time());
 
+        // Redireciona o usuário para a página de destino originalmente solicitada
         return redirect()->intended(route('dashboard', absolute: false));
     }
 }

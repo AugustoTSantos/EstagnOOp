@@ -1,5 +1,6 @@
 <?php
 
+// Importa os controllers necessários
 use App\Http\Controllers\ExameController;
 use App\Http\Controllers\OpcaoController;
 use App\Http\Controllers\ProfileController;
@@ -9,17 +10,22 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// Redireciona a raiz '/' para '/dashboard'
 Route::redirect('/', '/dashboard');
 
-// exige autentificação e verificação para entrar nas paginas
+// Agrupa rotas que exigem autenticação e verificação
 Route::middleware(['auth', 'verified'])->group(function() {
-    Route::get('/dashboard', fn() => Inertia::render('Dashboard')) -> name('dashboard');
+    // Define a rota para o dashboard, renderizando a view 'Dashboard' usando Inertia
+    Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
 });
 
+// Agrupa rotas que exigem apenas autenticação
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Define as rotas para o perfil do usuário
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit'); // Rota para editar perfil
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update'); // Rota para atualizar perfil
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); // Rota para excluir perfil
 });
 
+// Inclui o arquivo de rotas de autenticação
 require __DIR__.'/auth.php';

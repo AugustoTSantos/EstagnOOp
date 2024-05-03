@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'web'),
-        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+        'guard' => env('AUTH_GUARD', 'web'), // Define o guard padrão para autenticação
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'), // Define o broker padrão para redefinição de senha
     ],
 
     /*
@@ -37,8 +37,8 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
+            'driver' => 'session', // Define o driver de sessão para autenticação
+            'provider' => 'users', // Define o provider de usuários para este guard
         ],
     ],
 
@@ -61,14 +61,9 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'driver' => 'eloquent', // Define o driver Eloquent para buscar usuários
+            'model' => env('AUTH_MODEL', App\Models\User::class), // Define o modelo de usuário padrão
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
@@ -92,10 +87,10 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
-            'expire' => 60,
-            'throttle' => 60,
+            'provider' => 'users', // Define o provider de usuários para redefinição de senha
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'), // Define a tabela para armazenar os tokens de redefinição de senha
+            'expire' => 60, // Define o tempo de expiração dos tokens de redefinição de senha em minutos
+            'throttle' => 60, // Define o intervalo de tempo entre as solicitações de redefinição de senha em segundos
         ],
     ],
 
@@ -110,6 +105,6 @@ return [
     |
     */
 
-    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800), // Define o tempo limite para confirmação de senha em segundos
 
 ];

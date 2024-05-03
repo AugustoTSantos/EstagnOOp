@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'log'),
+    'default' => env('MAIL_MAILER', 'log'), // Define o mailer padrão, usando 'log' se não estiver definido
 
     /*
     |--------------------------------------------------------------------------
@@ -36,57 +36,61 @@ return [
 
     'mailers' => [
 
+        // Configuração do mailer SMTP
         'smtp' => [
             'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', '127.0.0.1'),
-            'port' => env('MAIL_PORT', 2525),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+            'url' => env('MAIL_URL'), // URL do servidor de e-mail
+            'host' => env('MAIL_HOST', '127.0.0.1'), // Host do servidor de e-mail
+            'port' => env('MAIL_PORT', 2525), // Porta do servidor de e-mail
+            'encryption' => env('MAIL_ENCRYPTION', 'tls'), // Tipo de criptografia
+            'username' => env('MAIL_USERNAME'), // Nome de usuário do servidor de e-mail
+            'password' => env('MAIL_PASSWORD'), // Senha do servidor de e-mail
+            'timeout' => null, // Tempo limite da conexão
+            'local_domain' => env('MAIL_EHLO_DOMAIN'), // Domínio local para HELO / EHLO
         ],
 
+        // Configuração do mailer SES (Amazon Simple Email Service)
         'ses' => [
             'transport' => 'ses',
         ],
 
+        // Configuração do mailer Postmark
         'postmark' => [
             'transport' => 'postmark',
-            // 'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
-            // 'client' => [
-            //     'timeout' => 5,
-            // ],
         ],
 
+        // Configuração do mailer Sendmail
         'sendmail' => [
             'transport' => 'sendmail',
-            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
+            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'), // Caminho do Sendmail
         ],
 
+        // Configuração do mailer Log
         'log' => [
             'transport' => 'log',
-            'channel' => env('MAIL_LOG_CHANNEL'),
+            'channel' => env('MAIL_LOG_CHANNEL'), // Canal de log
         ],
 
+        // Configuração do mailer Array (para testes)
         'array' => [
             'transport' => 'array',
         ],
 
+        // Configuração do mailer Failover (para fallback)
         'failover' => [
             'transport' => 'failover',
             'mailers' => [
-                'smtp',
-                'log',
+                'smtp', // Mailer principal
+                'log', // Mailer de fallback
             ],
         ],
 
+        // Configuração do mailer Round Robin (para balanceamento de carga)
         'roundrobin' => [
             'transport' => 'roundrobin',
             'mailers' => [
-                'ses',
-                'postmark',
+                'ses', // Mailer 1
+                'postmark', // Mailer 2
             ],
         ],
 
@@ -104,8 +108,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'), // Endereço de e-mail padrão do remetente
+        'name' => env('MAIL_FROM_NAME', 'Example'), // Nome do remetente
     ],
 
 ];

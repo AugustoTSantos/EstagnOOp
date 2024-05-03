@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'local'), // Define o disco de sistema de arquivos padrão
 
     /*
     |--------------------------------------------------------------------------
@@ -31,29 +31,29 @@ return [
     'disks' => [
 
         'local' => [
-            'driver' => 'local',
-            'root' => storage_path('app'),
-            'throw' => false,
+            'driver' => 'local', // Define o driver como "local" para armazenamento local
+            'root' => storage_path('app'), // Define o diretório raiz para o disco "local"
+            'throw' => false, // Define se devem ser lançadas exceções em caso de erros (opcional)
         ],
 
         'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
-            'visibility' => 'public',
-            'throw' => false,
+            'driver' => 'local', // Define o driver como "local" para armazenamento local
+            'root' => storage_path('app/public'), // Define o diretório raiz para o disco "public"
+            'url' => env('APP_URL').'/storage', // Define a URL base para o disco "public"
+            'visibility' => 'public', // Define a visibilidade dos arquivos (público)
+            'throw' => false, // Define se devem ser lançadas exceções em caso de erros (opcional)
         ],
 
         's3' => [
-            'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            'throw' => false,
+            'driver' => 's3', // Define o driver como "s3" para armazenamento na Amazon S3
+            'key' => env('AWS_ACCESS_KEY_ID'), // Define a chave de acesso da AWS
+            'secret' => env('AWS_SECRET_ACCESS_KEY'), // Define o segredo de acesso da AWS
+            'region' => env('AWS_DEFAULT_REGION'), // Define a região da AWS
+            'bucket' => env('AWS_BUCKET'), // Define o nome do bucket na AWS
+            'url' => env('AWS_URL'), // Define a URL base para o disco "s3" (opcional)
+            'endpoint' => env('AWS_ENDPOINT'), // Define o endpoint da AWS (opcional)
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false), // Define se deve usar um endpoint de estilo de caminho (opcional)
+            'throw' => false, // Define se devem ser lançadas exceções em caso de erros (opcional)
         ],
 
     ],
@@ -70,7 +70,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public'),
+        public_path('storage') => storage_path('app/public'), // Define os links simbólicos a serem criados (opcional)
     ],
 
 ];

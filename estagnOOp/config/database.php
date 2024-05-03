@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'sqlite'), // Define a conexão de banco de dados padrão
 
     /*
     |--------------------------------------------------------------------------
@@ -32,82 +32,34 @@ return [
     'connections' => [
 
         'sqlite' => [
-            'driver' => 'sqlite',
+            'driver' => 'sqlite', // Define o driver de banco de dados como SQLite
             'url' => env('DB_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
-            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+            'database' => env('DB_DATABASE', database_path('database.sqlite')), // Define o arquivo de banco de dados SQLite
+            'prefix' => '', // Define o prefixo de tabela (opcional)
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true), // Define se as restrições de chave estrangeira são habilitadas
         ],
 
         'mysql' => [
-            'driver' => 'mysql',
+            'driver' => 'mysql', // Define o driver de banco de dados como MySQL
             'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
+            'host' => env('DB_HOST', '127.0.0.1'), // Define o host do banco de dados MySQL
+            'port' => env('DB_PORT', '3306'), // Define a porta do banco de dados MySQL
+            'database' => env('DB_DATABASE', 'laravel'), // Define o nome do banco de dados MySQL
+            'username' => env('DB_USERNAME', 'root'), // Define o nome de usuário do banco de dados MySQL
+            'password' => env('DB_PASSWORD', ''), // Define a senha do banco de dados MySQL
+            'unix_socket' => env('DB_SOCKET', ''), // Define o socket Unix (opcional)
+            'charset' => env('DB_CHARSET', 'utf8mb4'), // Define o conjunto de caracteres do banco de dados MySQL
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'), // Define a colação do banco de dados MySQL
+            'prefix' => '', // Define o prefixo de tabela (opcional)
+            'prefix_indexes' => true, // Define se os índices têm prefixo
+            'strict' => true, // Define o modo de estrito
+            'engine' => null, // Define o mecanismo de armazenamento (opcional)
+            'options' => extension_loaded('pdo_mysql') ? array_filter([ // Define as opções de conexão (opcional)
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
 
-        'mariadb' => [
-            'driver' => 'mariadb',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => env('DB_CHARSET', 'utf8'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
-        ],
-
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => env('DB_CHARSET', 'utf8'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            // 'encrypt' => env('DB_ENCRYPT', 'yes'),
-            // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
-        ],
+        // Adicione configurações para outros drivers de banco de dados, se necessário
 
     ],
 
@@ -123,8 +75,8 @@ return [
     */
 
     'migrations' => [
-        'table' => 'migrations',
-        'update_date_on_publish' => true,
+        'table' => 'migrations', // Define o nome da tabela de registro de migrações
+        'update_date_on_publish' => true, // Define se a data de atualização deve ser atualizada ao publicar (opcional)
     ],
 
     /*
@@ -140,29 +92,29 @@ return [
 
     'redis' => [
 
-        'client' => env('REDIS_CLIENT', 'phpredis'),
+        'client' => env('REDIS_CLIENT', 'phpredis'), // Define o cliente Redis a ser utilizado
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'), // Define o prefixo para chaves de cache Redis
         ],
 
         'default' => [
             'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
-            'database' => env('REDIS_DB', '0'),
+            'host' => env('REDIS_HOST', '127.0.0.1'), // Define o host Redis padrão
+            'username' => env('REDIS_USERNAME'), // Define o nome de usuário (opcional)
+            'password' => env('REDIS_PASSWORD'), // Define a senha (opcional)
+            'port' => env('REDIS_PORT', '6379'), // Define a porta Redis padrão
+            'database' => env('REDIS_DB', '0'), // Define o número do banco de dados Redis padrão
         ],
 
         'cache' => [
             'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'username' => env('REDIS_USERNAME'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
-            'database' => env('REDIS_CACHE_DB', '1'),
+            'host' => env('REDIS_HOST', '127.0.0.1'), // Define o host Redis para cache
+            'username' => env('REDIS_USERNAME'), // Define o nome de usuário (opcional)
+            'password' => env('REDIS_PASSWORD'), // Define a senha (opcional)
+            'port' => env('REDIS_PORT', '6379'), // Define a porta Redis para cache
+            'database' => env('REDIS_CACHE_DB', '1'), // Define o número do banco de dados Redis para cache
         ],
 
     ],

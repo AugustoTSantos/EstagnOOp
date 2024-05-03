@@ -20,6 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): Response
     {
+        // Renderiza a view de registro
         return Inertia::render('Auth/Register');
     }
 
@@ -30,22 +31,27 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Valida os dados da requisição
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class, // Verifica se o e-mail já está em uso
+            'password' => ['required', 'confirmed', Rules\Password::defaults()], // Validação para a senha
         ]);
 
+        // Cria um novo usuário com os dados fornecidos
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password), // Hash da senha
         ]);
 
+        // Dispara o evento de registro
         event(new Registered($user));
 
+        // Autentica o novo usuário
         Auth::login($user);
 
+        // Redireciona o usuário para a página do painel
         return redirect(route('dashboard', absolute: false));
     }
 }

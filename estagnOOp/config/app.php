@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    // Define o nome da aplicação, usado em notificações e outros elementos da interface
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -27,6 +29,8 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+
+    // Determina o ambiente de execução da aplicação (produção, desenvolvimento, etc.)
 
     /*
     |--------------------------------------------------------------------------
@@ -41,6 +45,8 @@ return [
 
     'debug' => (bool) env('APP_DEBUG', false),
 
+    // Habilita ou desabilita o modo de depuração, que mostra mensagens de erro detalhadas
+
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -53,6 +59,8 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+
+    // Define a URL base da aplicação, usada para gerar URLs corretamente em comandos Artisan
 
     /*
     |--------------------------------------------------------------------------
@@ -67,6 +75,8 @@ return [
 
     'timezone' => env('APP_TIMEZONE', 'UTC'),
 
+    // Define o fuso horário padrão da aplicação
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -80,9 +90,15 @@ return [
 
     'locale' => env('APP_LOCALE', 'en'),
 
+    // Define a localidade padrão da aplicação para traduções e localização
+
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
+    // Define a localidade de fallback, usada quando a localidade padrão não está disponível
+
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+
+    // Define a localidade padrão para o Faker, usado para gerar dados falsos
 
     /*
     |--------------------------------------------------------------------------
@@ -97,13 +113,19 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    // Define o algoritmo de criptografia utilizado pela aplicação
+
     'key' => env('APP_KEY'),
+
+    // Define a chave de criptografia usada para serviços de criptografia da aplicação
 
     'previous_keys' => [
         ...array_filter(
             explode(',', env('APP_PREVIOUS_KEYS', ''))
         ),
     ],
+
+    // Define chaves de criptografia anteriores, úteis para descriptografar valores criptografados com chaves antigas
 
     /*
     |--------------------------------------------------------------------------
@@ -122,5 +144,7 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
+    // Define o driver usado para determinar e gerenciar o status do "modo de manutenção" da aplicação
 
 ];

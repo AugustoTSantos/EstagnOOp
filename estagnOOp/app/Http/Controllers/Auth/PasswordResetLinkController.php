@@ -17,6 +17,7 @@ class PasswordResetLinkController extends Controller
      */
     public function create(): Response
     {
+        // Renderiza a view para solicitar o link de redefinição de senha, passando a mensagem de status, se houver
         return Inertia::render('Auth/ForgotPassword', [
             'status' => session('status'),
         ]);
@@ -29,21 +30,22 @@ class PasswordResetLinkController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Valida os dados da requisição
         $request->validate([
             'email' => 'required|email',
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
+        // Envia o link de redefinição de senha para o e-mail fornecido
         $status = Password::sendResetLink(
             $request->only('email')
         );
 
+        // Se o link de redefinição de senha for enviado com sucesso, redireciona o usuário de volta com uma mensagem de status
         if ($status == Password::RESET_LINK_SENT) {
             return back()->with('status', __($status));
         }
 
+        // Se houver algum erro no envio do link de redefinição de senha, lança uma exceção de validação com a mensagem de erro correspondente
         throw ValidationException::withMessages([
             'email' => [trans($status)],
         ]);

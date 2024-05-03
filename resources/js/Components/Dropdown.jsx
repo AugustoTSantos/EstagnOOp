@@ -2,15 +2,20 @@ import { useState, createContext, useContext, Fragment } from 'react';
 import { Link } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 
+// Contexto para gerenciar o estado do dropdown
 const DropDownContext = createContext();
 
+// Componente principal que envolve todo o dropdown e fornece o contexto
 const Dropdown = ({ children }) => {
+    // Estado para controlar se o dropdown está aberto ou fechado
     const [open, setOpen] = useState(false);
 
+    // Função para alternar entre abrir e fechar o dropdown
     const toggleOpen = () => {
         setOpen((previousState) => !previousState);
     };
 
+    // Renderiza o componente Provider do contexto e passa o estado e a função para os componentes filhos
     return (
         <DropDownContext.Provider value={{ open, setOpen, toggleOpen }}>
             <div className="relative">{children}</div>
@@ -18,35 +23,40 @@ const Dropdown = ({ children }) => {
     );
 };
 
+// Componente para renderizar o gatilho (trigger) do dropdown
 const Trigger = ({ children }) => {
+    // Usa o contexto para acessar o estado e a função para controlar o dropdown
     const { open, setOpen, toggleOpen } = useContext(DropDownContext);
 
+    // Renderiza o componente de gatilho e o adiciona um evento de clique para alternar o estado do dropdown
     return (
         <>
             <div onClick={toggleOpen}>{children}</div>
-
             {open && <div className="fixed inset-0 z-40" onClick={() => setOpen(false)}></div>}
         </>
     );
 };
 
+// Componente para renderizar o conteúdo do dropdown
 const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-white dark:bg-gray-700', children }) => {
+    // Usa o contexto para acessar o estado e a função para controlar o dropdown
     const { open, setOpen } = useContext(DropDownContext);
 
+    // Determina as classes de alinhamento do conteúdo do dropdown
     let alignmentClasses = 'origin-top';
-
     if (align === 'left') {
         alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
     } else if (align === 'right') {
         alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
     }
 
+    // Determina as classes de largura do conteúdo do dropdown
     let widthClasses = '';
-
     if (width === '48') {
         widthClasses = 'w-48';
     }
 
+    // Renderiza o conteúdo do dropdown dentro de uma transição
     return (
         <>
             <Transition
@@ -70,7 +80,9 @@ const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-whit
     );
 };
 
+// Componente para renderizar um link dentro do dropdown
 const DropdownLink = ({ className = '', children, ...props }) => {
+    // Renderiza um link usando o componente Link fornecido pelo Inertia.js
     return (
         <Link
             {...props}
@@ -84,8 +96,9 @@ const DropdownLink = ({ className = '', children, ...props }) => {
     );
 };
 
+// Define os componentes secundários como propriedades do componente Dropdown para facilitar o uso
 Dropdown.Trigger = Trigger;
 Dropdown.Content = Content;
 Dropdown.Link = DropdownLink;
 
-export default Dropdown;
+export default Dropdown; // Exporta o componente Dropdown para ser usado em outros lugares da aplicação

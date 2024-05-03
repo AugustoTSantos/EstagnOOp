@@ -1,3 +1,4 @@
+// Importa os hooks e componentes necessários do projeto
 import { useRef } from 'react';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
@@ -6,16 +7,20 @@ import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 
+// Define o componente UpdatePasswordForm
 export default function UpdatePasswordForm({ className = '' }) {
+    // Referências para os inputs de senha atual e nova senha
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
+    // Configuração do formulário usando o hook useForm do Inertia
     const { data, setData, errors, put, reset, processing, recentlySuccessful } = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',
     });
 
+    // Função para atualizar a senha
     const updatePassword = (e) => {
         e.preventDefault();
 
@@ -36,20 +41,21 @@ export default function UpdatePasswordForm({ className = '' }) {
         });
     };
 
+    // Renderiza o componente UpdatePasswordForm
     return (
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Update Password</h2>
-
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                     Ensure your account is using a long, random password to stay secure.
                 </p>
             </header>
 
+            {/* Formulário de atualização de senha */}
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
+                {/* Campo de senha atual */}
                 <div>
                     <InputLabel htmlFor="current_password" value="Current Password" />
-
                     <TextInput
                         id="current_password"
                         ref={currentPasswordInput}
@@ -59,13 +65,12 @@ export default function UpdatePasswordForm({ className = '' }) {
                         className="mt-1 block w-full"
                         autoComplete="current-password"
                     />
-
                     <InputError message={errors.current_password} className="mt-2" />
                 </div>
 
+                {/* Campo de nova senha */}
                 <div>
                     <InputLabel htmlFor="password" value="New Password" />
-
                     <TextInput
                         id="password"
                         ref={passwordInput}
@@ -75,13 +80,12 @@ export default function UpdatePasswordForm({ className = '' }) {
                         className="mt-1 block w-full"
                         autoComplete="new-password"
                     />
-
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
+                {/* Campo de confirmação de nova senha */}
                 <div>
                     <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
                     <TextInput
                         id="password_confirmation"
                         value={data.password_confirmation}
@@ -90,13 +94,12 @@ export default function UpdatePasswordForm({ className = '' }) {
                         className="mt-1 block w-full"
                         autoComplete="new-password"
                     />
-
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
+                {/* Botão de salvar e mensagem de sucesso */}
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}>Save</PrimaryButton>
-
                     <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"

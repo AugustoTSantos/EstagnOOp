@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('que_id');
             $table->string('que_titulo')->nullable();
             $table->string('que_enunciado', 1000)->nullable();
-            $table->float('que_peso', 2, 2);
             $table->unsignedBigInteger('que_usu_id');
 
             $table->foreign('que_usu_id')->references('id')->on('users');

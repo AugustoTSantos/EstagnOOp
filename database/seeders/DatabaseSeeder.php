@@ -17,19 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()
-            ->count(10)
-            ->has(Questao::factory()->count(2, 10))
-            ->has(Opcao::factory()->count(2, 5), 'questoes') // Associa as opções às questões
-            ->has(Prova::factory()->count(2, 10))
-            ->create();
-
         User::factory()->create([
             'name' => 'Augusto',
             'email' => 'ats@example.com',
-            'password' => bcrypt('1234567*'),
-            'email_verified_at' => time()
+            'email_verified_at' => time(),
+            'password' => bcrypt('123456789'),
+            'usu_tipo' => TRUE
         ]);
-
     }
 }

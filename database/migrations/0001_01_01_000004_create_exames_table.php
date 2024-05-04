@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('exa_exame', function (Blueprint $table) {
             $table->id('exa_id');
+            $table->float('exa_peso', 2, 2);
             $table->unsignedBigInteger('exa_pro_id');
             $table->unsignedBigInteger('exa_que_id');
 
